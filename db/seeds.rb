@@ -8,7 +8,8 @@
 
 require "csv"
 
-Product.delete_all
+Product.destroy_all
+AdminUser.destroy_all
 
 product_file = Rails.root.join("db/bestbuy.csv")
 csv_data = File.read(product_file)
@@ -31,3 +32,7 @@ products.each do |c|
 end
 
 puts "#{Product.count} new products were added"
+if Rails.env.development?
+  AdminUser.create!(email: "admin@example.com", password: "password",
+                    password_confirmation: "password")
+end
