@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EcommerceApp</title>
+    <title>Byte me!</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
   </head>
 
   <body>
+    <section class="hero is-black is-bold">
+      <div class="hero-body is-centered">
+        <p class="title">
+          Byte me!</p>
+    </section>
+
+    <nav class="navbar has-shadow is-dark">
+      <div class="navbar-brand">
+        <a  class="navbar-burger">
+        </a>
+      </div>
+      <div class="navbar-menu is-active">
+        <div class="navbar-end">
+          <a class="navbar-item" href = "/"> Home</a>
+          <a class="navbar-item" href="/gpus/">Graphics cards</a>
+          <a class="navbar-item" href="/cases/">Computer Cases</a>
+          <a class="navbar-item" href="">Motherboards</a>
+          <a class="navbar-item" href="">Computer Processors</a>
+          <a class="navbar-item" href="">Computer Memory</a>
+        </div>
+
+      </div>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
