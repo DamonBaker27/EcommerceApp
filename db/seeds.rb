@@ -16,19 +16,18 @@ csv_data = File.read(product_file)
 products = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
 products.each do |c|
-  puts "#{c['Category']}"
-  # puts "#{c.inspect}"
+  # puts "#{c['image']}"
 
   product = Product.create(
     Category:    c["Category"],
     Name:        c["name"],
     Price:       c["price"].to_i,
     Description: c["description"],
-    image:       c["image"],
     Stock:       rand(1..50)
   )
-
-  # puts "#{product.Category}"
+  query = c["image"]
+  downloaded_image = URI.open(query)
+  product.image.attach(io: downloaded_image, filename: "d-#{c['name']}.jpg")
 end
 
 puts "#{Product.count} new products were added"
