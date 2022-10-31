@@ -11,4 +11,10 @@ Rails.application.routes.draw do
   get "/gpus/", to: "gpus#index"
 
   get "/cases/", to: "cases#index"
+
+  get "/ram/", to: "memory#index"
+
+  get "/motherboards/", to: "motherboards#index"
+
+  get "processors/", to: "processors#index"
 end

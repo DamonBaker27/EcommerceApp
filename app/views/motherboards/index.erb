@@ -1,6 +1,20 @@
-<ul></ul>
-<%@motherboards.each do |p|%>
-<li> <%= p.Name%></li>
-<img src="<%= p.image%>" alt="image">
-<%end%>
-</ul>
+<section class = "section">
+  <div class= "container">
+    <div class = "columns  is-flex-direction-row is-flex-wrap-wrap is-align-content-stretch">
+      <%@motherboards.each do |p|%>
+        <div class = "column is-one-quarter ">
+          <div class = "card">
+            <div class ="card-image has-text-centered ">
+              <figure class = "">
+                <img src="<%= p.image%>" alt=" Product image">
+              </figure>
+            </div>
+            <div class= "card-content">
+              <p><%= p.Name%></p>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</section>

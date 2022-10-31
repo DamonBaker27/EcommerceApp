@@ -1,5 +1,5 @@
 class MotherboardsController < ApplicationController
   def index
-    @motherboard = Product.where(category: "motherboards")
+    @motherboards = Product.where(Category: "Motherboards")
   end
 end
