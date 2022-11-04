@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :cases
   resources :gpus
+  resources :cart, only: %i[create destroy]
+  resources :products, only: %i[index show]
 
   get "/gpus/", to: "gpus#index"
 
