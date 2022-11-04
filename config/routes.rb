@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   root "products#index"
 
+  resources :cases
+  resources :gpus
+
   get "/gpus/", to: "gpus#index"
 
   get "/cases/", to: "cases#index"

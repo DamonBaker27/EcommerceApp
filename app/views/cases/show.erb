@@ -1,0 +1,35 @@
+<section class = "section">
+  <div class ="container">
+    <div class="">
+      <div class= "columns ">
+        <div class ="column is-half">
+          <%= image_tag @case.image%>
+        </div>
+        <div class = "column is-half ">
+          <div class ="">
+            <h1 class= "title is-4"><%= @case.Name%></h1>
+            <h1 class = "title is-4">Price: $<%=@case.Price%></h1>
+            <h1 class = "title is-4"><%=@case.Stock%> Left in stock!</h1>
+            <div class = "mt-4">
+              <%= button_tag "Add to cart" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class = "section">
+  <div class="content">
+    <div class = "container">
+      <%if @case.Description != "null"%>
+      <h2>Item Description</h2>
+      <p><%=@case.Description%></p>
+      <%else%>
+      <h2>No description avaliable.</h2>
+      <%end%>
+    </div>
+
+  </div>
+</div>
