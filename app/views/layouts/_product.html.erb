@@ -1,29 +1,30 @@
 <section class = "section">
 <%= debug session[:shopping_cart]%>
-<%=form_with url: cart_index_path, method: :post do%>
+
     <div class ="container">
       <div>
         <div class= "columns ">
           <div class ="column is-half">
-            <%= image_tag @case.image%>
+            <%= image_tag product.image%>
           </div>
           <div class = "column is-half ">
             <div class ="">
-              <h1 class= "title is-4"><%= @case.Name%></h1>
-              <h1 class = "title is-4">Price: $<%=@case.Price%></h1>
-              <h1 class = "title is-4"><%=@case.Stock%> Left in stock!</h1>
+              <h1 class= "title is-4"><%= product.Name%></h1>
+              <h1 class = "title is-4">Price: $<%=product.Price%></h1>
+              <h1 class = "title is-4"><%=product.Stock%> Left in stock!</h1>
               <div class = "mt-4">
 
-              <%if session[:shopping_cart].include?(@case.id)%>
-                <%= button_to cart_path(@case.id), method: :delete do %>
+              <%if session[:shopping_cart].include?(product.id)%>
+                <%= button_to cart_path(product.id), method: :delete do %>
                   Remove from cart
                 <%end%>
               <%else%>
                 <%=form_with url: cart_index_path, method: :post do%>
-                  <%= hidden_field_tag(:id, @case.id)%>
-                  <%= button_tag 'Add to cart' %>
+                  <%= hidden_field_tag(:id, product.id)%>
+                  <%= button_tag "Add to cart" %>
                 <%end%>
               <%end%>
+
               </div>
             </div>
           </div>
@@ -31,14 +32,13 @@
       </div>
     </form>
     </div>
-<%end%>
 </section>
 <section class = "section">
   <div class="content">
     <div class = "container">
-      <%if @case.Description != "null"%>
+      <%if product.Description != "null"%>
       <h2>Item Description</h2>
-      <p><%=@case.Description%></p>
+      <p><%=product.Description%></p>
       <%else%>
       <h2>No description avaliable.</h2>
       <%end%>

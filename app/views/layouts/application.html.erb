@@ -34,17 +34,22 @@
         </div>
         <div class = "navbar-end">
            <a class="navbar-item" href = "/admin/login"> Log in</a>
-           <p class="navbar-item"> Items in cart: <%=cart.count%></p>
+           <p class="navbar-item"> </p>
+           <a class="navbar-item" href = <%= cart_index_path%> > Items in cart: <%=cart.count%></a>
 
         </div>
 
       </div>
     </nav>
-
+  <section class = "section">
     <% if flash[:notice] %>
-    <p><%=flash[:notice]%></p>
+      <div class = "container">
+        <div class ="notification is-primary">
+          <p class = "title is-4"><%=flash[:notice]%></p>
+        </div>
+      </div>
     <%end%>
-
+  <section>
     <%= yield %>
   </body>
 </html>
