@@ -1,4 +1,5 @@
 <h1 class = "title is-2">Your Shopping Cart Items</h1>
+<%if cart.size != 0%>
 <table class ="table">
   <thead>
     <tr>
@@ -13,24 +14,33 @@
       </th>
     </tr>
   </thead>
-<% session[:shopping_cart].each do |i|%>
-<% product = Product.find(i)%>
-  <tbody>
-        <tr>
-      <th>
-        <%= product.Name%>
-      </th>
-      <th>
-        $<%= product.Price%>
-      </th>
-      <th>
-        <%=product.Stock%>
-      </th>
-    </tr>
-  </tbody>
+  <% @cart.each do |i|%>
+  <% product = Product.find(i.id)%>
+    <tbody>
+          <tr>
+        <th>
+          <%= link_to product.Name, product%>
+        </th>
+        <th>
+          $<%= product.Price%>
+        </th>
+        <th>
+          <%=product.Stock%> <%= button_to cart_path(product.id), method: :delete do %> Remove <%end%>
+        </th>
+      </tr>
+    </tbody>
+  <%end%>
+  </table>
+
+<h2 class= "title is-5">Gst: $<%= @gst_amount.round(2)%></h2>
+<h2 class= "title is-5">Pst: $<%= @pst_amount.round(2)%></h2>
+<h2 class= "title is-4">Order Subtotal: $<%= @sub_total%></h2>
+<%=@total%>
+
+<%else%>
+<h1 class ="title is-3">You have no items :(</h1>
+
+
+
+
 <%end%>
-</table>
-
-
-<%= @sub_total%>
-

@@ -10,8 +10,11 @@ Rails.application.routes.draw do
 
   resources :cases
   resources :gpus
-  resources :cart, only: %i[create destroy index]
+  # resources :cart, only: %i[create destroy index delete]
+  resources :cart
   resources :products, only: %i[index show]
+
+  delete "/cart/id", to: "cart#destroy"
 
   get "/gpus/", to: "gpus#index"
 

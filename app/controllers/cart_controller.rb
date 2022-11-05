@@ -9,15 +9,7 @@ class CartController < ApplicationController
       flash[:notice] = "#{product.Name} added to cart."
 
     end
-
-    @cart = Product.find(session[:shopping_cart])
-    @sub_total = 0
-
-    @cart.each do |item|
-      @sub_total += item.Price
-    end
-
-    redirect_to cart_index_path
+    redirect_to "cart/index", allow_other_host: true
   end
 
   def destroy
@@ -26,5 +18,21 @@ class CartController < ApplicationController
     session[:shopping_cart].delete(id)
     product = Product.find(id)
     flash[:notice] = "#{product.Name} removed from cart."
+  end
+
+  def index
+    @cart = Product.find(session[:shopping_cart])
+    @sub_total = 0
+    @total = 0
+    @gst_amount = 0
+    @pst_amount = 0
+
+    @cart.each do |item|
+      @gst_amount += item.Price * 0.05
+      @pst_amount += item.Price * 0.07
+      @sub_total += item.Price
+    end
+
+    @total = @gst_amount + @pst_amount + @sub_total
   end
 end
