@@ -1,3 +1,11 @@
+<% if user_signed_in?%>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+          <p class="navbar-item"><%=current_user.email%></p>
+          <%else%>
+          <p class="navbar-item"><%link_to "Sign Up", new_user_registration_path%></p>
+          <p class="navbar-item"><%=link_to "Sign In", new_user_session_path%></p>
+          <%end%>
+
 <section class = "section">
   <div class= "container">
     <div class = "columns  is-flex-direction-row is-flex-wrap-wrap is-align-content-stretch">

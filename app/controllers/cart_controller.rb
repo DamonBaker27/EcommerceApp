@@ -9,7 +9,8 @@ class CartController < ApplicationController
       flash[:notice] = "#{product.Name} added to cart."
 
     end
-    redirect_to "cart/index", allow_other_host: true
+
+    redirect_to cart_index_path, allow_other_host: true
   end
 
   def destroy
@@ -34,5 +35,6 @@ class CartController < ApplicationController
     end
 
     @total = @gst_amount + @pst_amount + @sub_total
+    redirect_to
   end
 end

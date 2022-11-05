@@ -20,7 +20,7 @@
                 <%end%>
               <%else%>
 
-                <%=form_with url: cart_index_path, method: :post do%>
+                <%=form_with url: cart_index_path do%>
                   <%= hidden_field_tag(:id, @case.id)%>
                   <%= button_tag 'Add to cart' %>
                 <%end%>
@@ -32,6 +32,27 @@
       </div>
     </form>
     </div>
+
+
+<%=form_with url: cart_index_path, method: :post do %>
+<%=hidden_field_tag(:id, @case.id)%>
+<%=button_tag "add it cart"%>
+
+<%end%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </section>
 <section class = "section">
