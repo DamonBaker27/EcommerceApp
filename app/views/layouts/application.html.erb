@@ -33,14 +33,14 @@
           <a class="navbar-item" href="/ram/">Computer Memory</a>
         </div>
         <div class = "navbar-end">
-           <a class="navbar-item" href = "/admin/login"> Log in</a>
+           <a class="navbar-item" href = "/admin/login">Admin Portal</a>
+           <a class="navbar-item" href = <%= cart_index_path %> > Items in cart: <%=cart.count%></a>
 
-           <% if user_signed_in?%>
-
+          <% if user_signed_in?%>
           <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
           <p class="navbar-item"><%=current_user.email%></p>
           <%else%>
-          <p class="navbar-item"><%link_to "Sign Up", new_user_registration_path%></p>
+
           <p class="navbar-item"><%=link_to "Sign In", new_user_session_path%></p>
           <%end%>
 

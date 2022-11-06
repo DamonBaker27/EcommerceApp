@@ -1,6 +1,5 @@
 <section class = "section">
 <%= debug session[:shopping_cart]%>
-<%=form_with url: cart_index_path, method: :post do%>
     <div class ="container">
       <div>
         <div class= "columns ">
@@ -19,7 +18,8 @@
                   Remove from cart
                 <%end%>
               <%else%>
-                <%=form_with url: cart_index_path, method: :post do%>
+
+                <%=form_with url: cart_index_path do%>
                   <%= hidden_field_tag(:id, @product.id)%>
                   <%= button_tag 'Add to cart' %>
                 <%end%>
@@ -31,7 +31,7 @@
       </div>
     </form>
     </div>
-<%end%>
+
 </section>
 <section class = "section">
   <div class="content">

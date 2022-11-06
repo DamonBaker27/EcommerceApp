@@ -1,26 +1,26 @@
 <section class = "section">
 <%= debug session[:shopping_cart]%>
-<%=form_with url: cart_index_path, method: :post do%>
     <div class ="container">
       <div>
         <div class= "columns ">
           <div class ="column is-half">
-            <%= image_tag @ram.image%>
+            <%= image_tag @case.image%>
           </div>
           <div class = "column is-half ">
             <div class ="">
-              <h1 class= "title is-4"><%= @ram.Name%></h1>
-              <h1 class = "title is-4">Price: $<%=@ram.Price%></h1>
-              <h1 class = "title is-4"><%=@ram.Stock%> Left in stock!</h1>
+              <h1 class= "title is-4"><%= @case.Name%></h1>
+              <h1 class = "title is-4">Price: $<%=@case.Price%></h1>
+              <h1 class = "title is-4"><%=@case.Stock%> Left in stock!</h1>
               <div class = "mt-4">
 
-              <%if session[:shopping_cart].include?(@ram.id)%>
-                <%= button_to cart_path(@ram.id), method: :delete do %>
+              <%if session[:shopping_cart].include?(@case.id)%>
+                <%= button_to cart_path(@case.id), method: :delete do %>
                   Remove from cart
                 <%end%>
               <%else%>
-                <%=form_with url: cart_index_path, method: :post do%>
-                  <%= hidden_field_tag(:id, @ram.id)%>
+
+                <%=form_with url: cart_index_path do%>
+                  <%= hidden_field_tag(:id, @case.id)%>
                   <%= button_tag 'Add to cart' %>
                 <%end%>
               <%end%>
@@ -31,14 +31,13 @@
       </div>
     </form>
     </div>
-<%end%>
 </section>
 <section class = "section">
   <div class="content">
     <div class = "container">
-      <%if @ram.Description != "null"%>
+      <%if @case.Description != "null"%>
       <h2>Item Description</h2>
-      <p><%=@ram.Description%></p>
+      <p><%=@case.Description%></p>
       <%else%>
       <h2>No description avaliable.</h2>
       <%end%>

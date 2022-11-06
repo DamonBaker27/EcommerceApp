@@ -1,6 +1,5 @@
 <section class = "section">
 <%= debug session[:shopping_cart]%>
-
     <div class ="container">
       <div>
         <div class= "columns ">
@@ -32,14 +31,6 @@
       </div>
     </form>
     </div>
-
-
-<%=form_with url: cart_index_path, method: :post do %>
-<%=hidden_field_tag(:id, @case.id)%>
-<%=button_tag "add it cart"%>
-
-<%end%>
-
 
 
 

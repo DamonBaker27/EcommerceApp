@@ -19,23 +19,23 @@
     <tbody>
           <tr>
         <th>
-          <%= link_to product.Name, product%>
+          <%= link_to i.Name, i%>
         </th>
         <th>
-          $<%= product.Price%>
+          $<%= i.Price%>
         </th>
         <th>
-          <%=product.Stock%> <%= button_to cart_path(product.id), method: :delete do %> Remove <%end%>
+          <%=i.Stock%> <%= button_to cart_path(i.id), method: :delete do %> Remove <%end%>
         </th>
       </tr>
     </tbody>
   <%end%>
   </table>
 
-<h2 class= "title is-5">Gst: $<%= @gst_amount.round(2)%></h2>
-<h2 class= "title is-5">Pst: $<%= @pst_amount.round(2)%></h2>
-<h2 class= "title is-4">Order Subtotal: $<%= @sub_total%></h2>
-<%=@total%>
+<h2 class= "title is-6">Gst: $<%= @gst_amount.round(2)%></h2>
+<h2 class= "title is-6">Pst: $<%= @pst_amount.round(2)%></h2>
+<h2 class= "title is-5">Subtotal: $<%= @sub_total%></h2>
+<h2 class= "title is-4">Total: $<%= @total%></h2>
 
 <%else%>
 <h1 class ="title is-3">You have no items :(</h1>
