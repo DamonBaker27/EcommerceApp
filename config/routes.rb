@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   resources :cases
   resources :gpus
   resources :cart
-  resources :cart
   resources :products, only: %i[index show]
+  resources :order_items
 
   # delete "/cart/", to: "cart#destroy"
 
