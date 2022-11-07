@@ -4,16 +4,15 @@
   <div class="columns has-background-white px-3 py-4">
     <div class="column">
         <%= image_tag @product.image %>
-
     </div>
 
     <div class="column is-two-fifths">
       <div class="mt-6">
-        DibbyNote is proud to present <i><%= @product.Name %></i> as a finest
-        product of our <%= @product.Name %> instrument. Made by the best
-        manufacturers of the world, <b>Dibby Industries Inc.</b>, we are proud
-        to maintain high quality products just for you. Purchase yours now today
-        and be delivered right at your door steps in just 2 weeks.
+        <%if @product.Description != "null"%>
+        <%=@product.Description%>
+        <%else%>
+        No description available.
+        <%end%>
       </div>
 
         <p class="is-size-3 my-5">
@@ -21,7 +20,7 @@
         </p>
 
         <p>
-          Instrument Family:
+          Product category:
           <i>
            link_to @product.type.name, type_path(@product.type_id)
           </i>
@@ -29,7 +28,7 @@
 
         <% if user_signed_in? %>
           <p>
-            Deliver to <%= current_user %> -  current_user.address
+            Deliver to <%= current_user.email %>
           </p>
         <% end %>
 
@@ -38,7 +37,7 @@
         <div class="my-5">
           <% if user_signed_in? %>
             <% if session[:shopping_cart].include?(@product.id) %>
-              <%= button_to "Remove from Cart", remove_from_cart_path(@product.id), method: :delete, class: "button is-danger" %>
+              <%= button_to "Remove from Cart", remove_from_cart_path(@product.id), method: :delete %>
             <% else %>
               <%= button_to "Add to Cart", add_to_cart_path(@product.id), class: "button is-primary" %>
               <%= form_with url: checkout_create_path, remote: true do %>
@@ -50,8 +49,6 @@
             <%= link_to "Sign In to Purchase", new_user_session_path, class: "button is-link is-rounded" %>
           <% end %>
         </div>
-
-
         <p>Secure Transaction</p>
         <p>Ships from Canada and sold by <%= link_to "Byte me!", root_path %></p>
     </div>
