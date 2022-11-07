@@ -1,50 +1,59 @@
-<section class = "section">
-<%= debug session[:shopping_cart]%>
-    <div class ="container">
-      <div>
-        <div class= "columns ">
-          <div class ="column is-half">
-            <%= image_tag @product.image%>
-          </div>
-          <div class = "column is-half ">
-            <div class ="">
-              <h1 class= "title is-4"><%= @product.Name%></h1>
-              <h1 class = "title is-4">Price: $<%=@product.Price%></h1>
-              <h1 class = "title is-4"><%=@product.Stock%> Left in stock!</h1>
-              <div class = "mt-4">
+<div class="container px-5 py-6 has-background-white-bis">
+  <h1 class="title is-1"><%= @product.Name %></h1>
 
-              <%if session[:shopping_cart].include?(@product.id)%>
-                <%= button_to cart_path(@product.id), method: :delete do %>
-                  Remove from cart
-                <%end%>
-              <%else%>
+  <div class="columns has-background-white px-3 py-4">
+    <div class="column">
+        <%= image_tag @product.image %>
 
-
-
-                <%=form_with model: @order_item do |f|%>
-                <%= f.hidden_field :product_id, value: @product.id%>
-                <%= f.hidden_field :quantity, value: 1, min: 1%>
-                <%= f.submit "Add To Cart" %>
-                <%end%>
-
-              <%end%>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
     </div>
-</section>
-<section class = "section">
-  <div class="content">
-    <div class = "container">
-      <%if @product.Description != "null"%>
-      <h2>Item Description</h2>
-      <p><%=@product.Description%></p>
-      <%else%>
-      <h2>No description avaliable.</h2>
-      <%end%>
+
+    <div class="column is-two-fifths">
+      <div class="mt-6">
+        DibbyNote is proud to present <i><%= @product.Name %></i> as a finest
+        product of our <%= @product.Name %> instrument. Made by the best
+        manufacturers of the world, <b>Dibby Industries Inc.</b>, we are proud
+        to maintain high quality products just for you. Purchase yours now today
+        and be delivered right at your door steps in just 2 weeks.
+      </div>
+
+        <p class="is-size-3 my-5">
+          <b><sup>$</sup><%= @product.Price %></b>
+        </p>
+
+        <p>
+          Instrument Family:
+          <i>
+           link_to @product.type.name, type_path(@product.type_id)
+          </i>
+        </p>
+
+        <% if user_signed_in? %>
+          <p>
+            Deliver to <%= current_user %> -  current_user.address
+          </p>
+        <% end %>
+
+        <p><b>In Stock</b></p>
+
+        <div class="my-5">
+          <% if user_signed_in? %>
+            <% if session[:shopping_cart].include?(@product.id) %>
+              <%= button_to "Remove from Cart", remove_from_cart_path(@product.id), method: :delete, class: "button is-danger" %>
+            <% else %>
+              <%= button_to "Add to Cart", add_to_cart_path(@product.id), class: "button is-primary" %>
+              <%= form_with url: checkout_create_path, remote: true do %>
+                <%= hidden_field_tag(:product_id, @product.id) %>
+                <%= button_tag 'Buy Now', class: "button is-info mt-2" %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to "Sign In to Purchase", new_user_session_path, class: "button is-link is-rounded" %>
+          <% end %>
+        </div>
+
+
+        <p>Secure Transaction</p>
+        <p>Ships from Canada and sold by <%= link_to "Byte me!", root_path %></p>
     </div>
   </div>
-</section>
+</div>

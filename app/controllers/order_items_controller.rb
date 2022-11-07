@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :set_order
-
+  @order_items = current_order.order_items
   def create
     @order = current_order
     @order_item = @order.order_item.new(order_params)

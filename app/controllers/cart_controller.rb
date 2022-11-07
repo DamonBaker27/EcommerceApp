@@ -2,29 +2,6 @@ class CartController < ApplicationController
   helper_method :calculate_gst
   helper_method :calculate_pst
 
-  def create
-    # logger.debug("adding #{params[:id]} to cart.")
-    id = params[:id].to_i
-
-    unless session[:shopping_cart].include?(id)
-      session[:shopping_cart] << id
-      product = Product.find(id)
-      flash[:notice] = "#{product.Name} added to cart."
-    end
-
-    redirect_to cart_index_path
-  end
-
-  def destroy
-    id = params[:id].to_i
-    logger.debug(id)
-    session[:shopping_cart].delete(id)
-    product = Product.find(id)
-    redirect_to cart_index_path
-
-    flash[:notice] = "#{product.Name} removed from cart."
-  end
-
   def index
     @cart = Product.find(session[:shopping_cart])
     @sub_total = 0
@@ -47,9 +24,5 @@ class CartController < ApplicationController
 
   def calculate_pst
     @pst_amount = @sub_total * 0.07
-  end
-
-  def calculate_total
-    (calculate_gst + calculate_pst).round(2)
   end
 end

@@ -13,11 +13,15 @@ Rails.application.routes.draw do
 
   root "products#index"
 
+  post "products/add_to_cart/:id", to: "products#add_to_cart", as: "add_to_cart"
+  delete "products/remove_from_cart/:id", to: "products#remove_from_cart", as: "remove_from_cart"
+
+  resources :products
+  # get "search", to: "Products#search"
   resources :cases
   resources :gpus
   resources :cart
-  resources :products, only: %i[index show]
-  resources :order_items
+  # resources :products, only: %i[index show]
 
   # delete "/cart/", to: "cart#destroy"
 
