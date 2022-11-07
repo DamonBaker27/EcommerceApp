@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "order_items/create"
+  get "order_items/update"
+  get "order_items/destroy"
   # devise_for :models
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -12,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :cases
   resources :gpus
-  resources :cart, only: %i[create destroy index delete]
+  resources :cart
   resources :cart
   resources :products, only: %i[index show]
 

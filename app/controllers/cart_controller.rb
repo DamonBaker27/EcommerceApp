@@ -48,4 +48,8 @@ class CartController < ApplicationController
   def calculate_pst
     @pst_amount = @sub_total * 0.07
   end
+
+  def calculate_total
+    (calculate_gst + calculate_pst).round(2)
+  end
 end

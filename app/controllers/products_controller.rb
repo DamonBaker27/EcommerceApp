@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.where(category: params[:category])
+    @products = Product.all
   end
 
   def show
