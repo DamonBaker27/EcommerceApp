@@ -33,6 +33,8 @@ gem 'image_processing'
 
 gem "net-http"
 
+gem 'stripe'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -52,6 +54,8 @@ gem "bootsnap", require: false
 gem 'activeadmin'
 
 gem 'devise'
+
+gem 'kaminari'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
