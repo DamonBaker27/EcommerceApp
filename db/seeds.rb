@@ -9,17 +9,30 @@
 require "csv"
 
 Product.destroy_all
+Category.destroy_all
 AdminUser.destroy_all
 
 product_file = Rails.root.join("db/bestbuy.csv")
 csv_data = File.read(product_file)
 products = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
+category_file = Rails.root.join("db/categories.csv")
+category_csv_data = File.read(category_file)
+categories = CSV.parse(category_csv_data, headers: true, encoding: "utf-8")
+
+categories.each do |p|
+  category = Category.create(
+    name:        p["name"],
+    description: p["description"]
+  )
+end
+puts "#{Category.count} new categories were added"
 products.each do |c|
   puts "#{c['image']}"
+  puts "#{c['Category']}"
+  category = Category.find_or_create_by(name: c["Category"])
 
-  product = Product.create(
-    Category:    c["Category"],
+  product = category.products.find_or_create_by(
     Name:        c["name"],
     Price:       c["price"].to_f,
     Description: c["description"],
@@ -31,6 +44,8 @@ products.each do |c|
 end
 
 puts "#{Product.count} new products were added"
+puts "#{Category.count} new categories were added"
+
 if Rails.env.development?
   AdminUser.create!(email: "admin@example.com", password: "password",
                     password_confirmation: "password")

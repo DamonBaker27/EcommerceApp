@@ -22,7 +22,7 @@
         <p>
           Product category:
           <i>
-           link_to @product.type.name, type_path(@product.type_id)
+           <%=@product.categories.name%>
           </i>
         </p>
 
@@ -32,7 +32,7 @@
           </p>
         <% end %>
 
-        <p><b>In Stock</b></p>
+        <p><b>In Stock <%=@product.Stock%> available</b></p>
 
         <div class="my-5">
           <% if user_signed_in? %>

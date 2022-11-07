@@ -15,7 +15,7 @@ class CheckoutController < ApplicationController
       line_items:           [
         name:        product.Name,
         description: product.Description,
-        amount:      product.Price, # price * 100.to_i
+        amount:      product.Price * 100.to_i, # price * 100.to_i
         currency:    "cad",
         quantity:    1
       ]
