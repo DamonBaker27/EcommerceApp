@@ -22,7 +22,7 @@
         <p>
           Product category:
           <i>
-           <%=@product.categories.name%>
+           <%= link_to @product.category.name, @product.category %>
           </i>
         </p>
 
@@ -34,7 +34,7 @@
 
         <p><b>In Stock <%=@product.Stock%> available</b></p>
 
-        <div class="my-5">
+        <div class="my-2">
           <% if user_signed_in? %>
             <% if session[:shopping_cart].include?(@product.id) %>
               <%= button_to "Remove from Cart", remove_from_cart_path(@product.id), method: :delete %>

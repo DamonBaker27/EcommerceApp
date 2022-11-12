@@ -20,13 +20,16 @@ category_file = Rails.root.join("db/categories.csv")
 category_csv_data = File.read(category_file)
 categories = CSV.parse(category_csv_data, headers: true, encoding: "utf-8")
 
+province_file = Rails.root.join("db/taxes.csv")
+province_csv_data = File.read(province_file)
+provinces = CSV.parse(province_csv_data, headers: true, encoding: "utf-8")
+
 categories.each do |p|
   category = Category.create(
     name:        p["name"],
     description: p["description"]
   )
 end
-puts "#{Category.count} new categories were added"
 products.each do |c|
   puts "#{c['image']}"
   puts "#{c['Category']}"
