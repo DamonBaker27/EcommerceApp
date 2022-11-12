@@ -1,0 +1,25 @@
+  <aside>
+<form action = "">
+  <section class = "section">
+    <div class= "container">
+      <div class = "columns  is-flex-direction-row is-flex-wrap-wrap is-align-content-stretch">
+        <%@cases.each do |p|%>
+          <div class = "column is-one-quarter ">
+            <div class = "card">
+              <div class ="card-image has-text-centered ">
+                <figure class = "">
+                  <%= image_tag p.image%>
+                </figure>
+              </div>
+              <div class= "card-content">
+                <p><a href="/cases/<%=p.id%>"><%=p.Name%></p></a>
+                <p><%= p.Price%></p>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </section>
+</form>
+  </aside>

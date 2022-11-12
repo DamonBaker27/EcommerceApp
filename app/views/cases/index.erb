@@ -1,26 +1,28 @@
-<section class = "section">
-  <div class= "container">
-    <div class = "columns   is-flex-direction-row is-flex-wrap-wrap  ">
-      <%@cases.each do |p|%>
-        <div class = "column card is-one-quarter is-3 ">
-          <div class = "">
-            <div class ="card-image has-text-centered ">
-              <figure class = "">
-                <img src="<%= p.image%>" alt=" Product image">
-              </figure>
-            </div>
-            <div class= "card-content">
-              <p><%= link_to p.Name , p.Name%></p>
+<form action = "">
+  <section class = "section">
+    <div class= "container">
+      <div class = "columns   is-flex-direction-row is-flex-wrap-wrap  ">
+        <%@cases.each do |p|%>
+          <div class = "column card is-one-quarter is-3 ">
+            <div class = "">
+              <div class ="card-image has-text-centered ">
+                <figure class = "">
+                  <%= image_tag p.image%>
+                </figure>
+              </div>
+              <div class= "card-content">
+                <p><a href="/cases/<%=p.id%>"><%= link_to p.Name ,p.Name%></p></a>
+                <p><%= p.Price%></p>
+              </div>
               <p> Price: <%= p.Price%></p>
               <%= button%>
             </div>
           </div>
-        </div>
-      <%end%>
+        <%end%>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
+</form>
 
 
 

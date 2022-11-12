@@ -1,0 +1,42 @@
+<section class = "section">
+<%= debug session[:shopping_cart]%>
+    <div class ="container">
+      <div>
+        <div class= "columns ">
+          <div class ="column is-half">
+            <%= image_tag @case.image%>
+          </div>
+          <div class = "column is-half ">
+            <div class ="">
+              <h1 class= "title is-4"><%= @case.Name%></h1>
+              <h1 class = "title is-4">Price: $<%=@case.Price%></h1>
+              <h1 class = "title is-4"><%=@case.Stock%> Left in stock!</h1>
+              <div class = "mt-4">
+
+                <%=form_with url: order_items_create_path, model: @order_item do |f|%>
+                <%= f.hidden_field :product_id, value: @case.id%>
+                <%= f.hidden_field :quantity, value: 1%>
+                <%= f.submit "Add To Cart" %>
+                <%end%>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    </div>
+</section>
+<section class = "section">
+  <div class="content">
+    <div class = "container">
+      <%if @case.Description != "null"%>
+      <h2>Item Description</h2>
+      <p><%=@case.Description%></p>
+      <%else%>
+      <h2>No description avaliable.</h2>
+      <%end%>
+    </div>
+  </div>
+</section>

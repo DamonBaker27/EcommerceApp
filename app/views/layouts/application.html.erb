@@ -25,20 +25,40 @@
       </div>
       <div class="navbar-menu is-active">
         <div class="navbar-end">
-          <a class="navbar-item" href = "/"> Home</a>
-          <a class="navbar-item" href="/gpus/">Graphics cards</a>
+          <a class="navbar-item" href = "/products/"> Home</a>
+          <a class="navbar-item" href="category/Graphics cards">Graphics cards</a>
           <a class="navbar-item" href="/cases/">Computer Cases</a>
           <a class="navbar-item" href="/motherboards/">Motherboards</a>
           <a class="navbar-item" href="/processors/">Computer Processors</a>
           <a class="navbar-item" href="/ram/">Computer Memory</a>
         </div>
         <div class = "navbar-end">
-           <a class="navbar-item" href = "/admin/login"> Log in</a>
+           <a class="navbar-item" href = "/admin/login">Admin Portal</a>
+           <a class="navbar-item" href = <%= cart_index_path %> > Items in cart: <%=cart.count%></a>
+
+          <% if user_signed_in?%>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+          <p class="navbar-item"><%=current_user.email%></p>
+          <%else%>
+
+          <p class="navbar-item"><%=link_to "Sign In", new_user_session_path%></p>
+          <%end%>
+
+
+
         </div>
 
       </div>
     </nav>
-
+  <section class = "section">
+    <% if flash[:notice] %>
+      <div class = "container">
+        <div class ="notification is-primary">
+          <p class = "title is-4"><%=flash[:notice]%></p>
+        </div>
+      </div>
+    <%end%>
+  <section>
     <%= yield %>
   </body>
 </html>

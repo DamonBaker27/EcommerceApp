@@ -1,0 +1,47 @@
+<section class = "section">
+<%= debug session[:shopping_cart]%>
+<%=form_with url: cart_index_path, method: :post do%>
+    <div class ="container">
+      <div>
+        <div class= "columns ">
+          <div class ="column is-half">
+            <%= image_tag @processors.image%>
+          </div>
+          <div class = "column is-half ">
+            <div class ="">
+              <h1 class= "title is-4"><%= @processors.Name%></h1>
+              <h1 class = "title is-4">Price: $<%=@processors.Price%></h1>
+              <h1 class = "title is-4"><%=@processors.Stock%> Left in stock!</h1>
+              <div class = "mt-4">
+
+              <%if session[:shopping_cart].include?(@processors.id)%>
+                <%= button_to cart_path(@processors.id), method: :delete do %>
+                  Remove from cart
+                <%end%>
+              <%else%>
+                <%=form_with url: cart_index_path, method: :post do%>
+                  <%= hidden_field_tag(:id, @processors.id)%>
+                  <%= button_tag 'Add to cart' %>
+                <%end%>
+              <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    </div>
+<%end%>
+</section>
+<section class = "section">
+  <div class="content">
+    <div class = "container">
+      <%if @processors.Description != "null"%>
+      <h2>Item Description</h2>
+      <p><%=@processors.Description%></p>
+      <%else%>
+      <h2>No description avaliable.</h2>
+      <%end%>
+    </div>
+  </div>
+</section>

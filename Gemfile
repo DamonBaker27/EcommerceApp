@@ -19,7 +19,7 @@ gem "puma", "~> 5.0"
 gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+#gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
@@ -29,6 +29,11 @@ gem "jbuilder"
 
 gem 'sass-rails', '>= 6'
 
+gem 'image_processing'
+
+gem "net-http"
+
+gem 'stripe'
 
 
 # Use Redis adapter to run Action Cable in production
@@ -49,6 +54,8 @@ gem "bootsnap", require: false
 gem 'activeadmin'
 
 gem 'devise'
+
+gem 'kaminari'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
