@@ -11,6 +11,8 @@ require "csv"
 Product.destroy_all
 Category.destroy_all
 AdminUser.destroy_all
+Tax.destroy_all
+Province.destroy_all
 
 product_file = Rails.root.join("db/bestbuy.csv")
 csv_data = File.read(product_file)
@@ -23,6 +25,27 @@ categories = CSV.parse(category_csv_data, headers: true, encoding: "utf-8")
 province_file = Rails.root.join("db/taxes.csv")
 province_csv_data = File.read(province_file)
 provinces = CSV.parse(province_csv_data, headers: true, encoding: "utf-8")
+
+provinces.each do |pr|
+  province = Province.create(
+    name: pr["name"],
+    code: pr["code"]
+  )
+
+  unless province.valid?
+    Rails.logger.debug "Invalid Order #{province.name} Status"
+    next
+  end
+
+  puts province.inspect
+  tax_rate = province.create_tax(
+    pst:   pr["pst"],
+    gst:   pr["gst"],
+    hst:   pr["hst"],
+    total: pr["total"]
+  )
+  puts tax_rate.inspect
+end
 
 categories.each do |p|
   category = Category.create(
