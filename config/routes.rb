@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get "order_items/update"
   get "order_items/destroy"
   # devise_for :models
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -25,22 +26,10 @@ Rails.application.routes.draw do
 
   resources :products
   # get "search", to: "Products#search"
-  resources :cases
-  resources :gpus
   resources :cart
   resources :categories
   # resources :products, only: %i[index show]
 
   # delete "/cart/", to: "cart#destroy"
   post "category/name", to: "category#index"
-
-  get "/gpus/", to: "gpus#index"
-
-  get "/cases/", to: "cases#index"
-
-  get "/ram/", to: "memory#index"
-
-  get "/motherboards/", to: "motherboards#index"
-
-  get "processors/", to: "processors#index"
 end
