@@ -47,8 +47,8 @@
 
 <%end%>
 
-  <div class="">
-    <%= button_to "continue shopping", products_path, class: "button is-success"%>
-    <br>
-    <%= button_to "Place order", checkout_create_path, class: "button is-black" %>
+  <div class = "title is-4"><%= link_to "continue shopping", root_path%></div>
+
+  <div class="mt-4">
+    <%= button_to "Place order", checkout_create_path, class: "button is-success" %>
   </div>
