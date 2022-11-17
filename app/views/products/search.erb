@@ -1,8 +1,13 @@
-<form action = "">
+<%= paginate @products%>
   <section class = "section">
+  <%if @products.count > 0 %>
+  <h1 class="title is-2">Displaying <%=  @products.count%> Products</h1>
+  <%else%>
+  <h1 class="title is-2">No Products found.</h1>
+  <%end%>
     <div class= "container">
       <div class = "columns  is-flex-direction-row is-flex-wrap-wrap is-align-content-stretch">
-        <%@gpus.each do |p|%>
+        <%@products.each do |p|%>
           <div class = "column is-one-quarter ">
             <div class = "card">
               <div class ="card-image has-text-centered ">
@@ -11,8 +16,10 @@
                 </figure>
               </div>
               <div class= "card-content">
-                <p><a href="/cases/<%=p.id%>"><%=p.Name%></p></a>
-                <p><%= p.Price%></p>
+                <p><a href="/products/<%=p.id%>"><%=p.Name%></p></a>
+                <p class="is-size-3 my-5">
+                  <b>$<%= p.Price %></b>
+                </p>
               </div>
             </div>
           </div>
@@ -21,8 +28,3 @@
     </div>
   </section>
 </form>
-
-
-
-
-

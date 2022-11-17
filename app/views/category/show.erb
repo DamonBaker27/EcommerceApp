@@ -1,9 +1,9 @@
-  <aside>
-<form action = "">
+<h1 class = "title is-1"><%=@category.name %></h1>
+
   <section class = "section">
     <div class= "container">
       <div class = "columns  is-flex-direction-row is-flex-wrap-wrap is-align-content-stretch">
-        <%@cases.each do |p|%>
+        <%@category.products.each do |p|%>
           <div class = "column is-one-quarter ">
             <div class = "card">
               <div class ="card-image has-text-centered ">
@@ -12,8 +12,10 @@
                 </figure>
               </div>
               <div class= "card-content">
-                <p><a href="/cases/<%=p.id%>"><%=p.Name%></p></a>
-                <p><%= p.Price%></p>
+                <p><a href="/products/<%=p.id%>"><%=p.Name%></p></a>
+                <p class="is-size-3 my-5">
+                  <b>$<%= p.Price %></b>
+                </p>
               </div>
             </div>
           </div>
@@ -22,4 +24,3 @@
     </div>
   </section>
 </form>
-  </aside>

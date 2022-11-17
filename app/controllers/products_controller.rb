@@ -21,10 +21,21 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.page(params[:page])
-    @categories = Category.all
   end
 
   def show
     @product = Product.find(params[:id])
+  end
+
+  def search
+    wildcard_search = "%#{params[:keywords]}%"
+    category_id = params[:categories]
+
+    @products = if category_id != "0"
+                  Product.where("name LIKE ? AND category_id = ?", wildcard_search,
+                                category_id).page(params[:page])
+                else
+                  Product.where("name LIKE ?", wildcard_search).page(params[:page])
+                end
   end
 end

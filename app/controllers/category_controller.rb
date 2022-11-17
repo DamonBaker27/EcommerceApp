@@ -1,5 +1,9 @@
 class CategoryController < ApplicationController
   def index
-    @product = Category.where("name LIKE ?", "%" + params[:name] + "%")
+    @categories = Category.all
+  end
+
+  def show
+    @category = Category.find(params[:id])
   end
 end

@@ -25,29 +25,24 @@
       </div>
       <div class="navbar-menu is-active">
         <div class="navbar-end">
-          <a class="navbar-item" href = "/products/"> Home</a>
-          <a class="navbar-item" href="category/Graphics cards">Graphics cards</a>
-          <a class="navbar-item" href="/cases/">Computer Cases</a>
-          <a class="navbar-item" href="/motherboards/">Motherboards</a>
-          <a class="navbar-item" href="/processors/">Computer Processors</a>
-          <a class="navbar-item" href="/ram/">Computer Memory</a>
+          <a class="navbar-item" href = "/products/"> Products</a>
+          <a class="navbar-item" href = "<%=category_index_path%>"> Categories</a>
+          <a class="navbar-item" href="<%= category_path(2)%>">Graphics cards</a>
         </div>
         <div class = "navbar-end">
            <a class="navbar-item" href = "/admin/login">Admin Portal</a>
            <a class="navbar-item" href = <%= cart_index_path %> > Items in cart: <%=cart.count%></a>
 
           <% if user_signed_in?%>
-          <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
-          <p class="navbar-item"><%=current_user.email%></p>
+          <p class="navbar-item"><b>Hi, <%=current_user.name%>!</b></p>
+          <br>
+          <%= button_to "Sign Out", destroy_user_session_path, class: "button is-success", method: :delete %>
+
           <%else%>
 
           <p class="navbar-item"><%=link_to "Sign In", new_user_session_path%></p>
           <%end%>
-
-
-
         </div>
-
       </div>
     </nav>
   <section class = "section">
@@ -59,6 +54,18 @@
       </div>
     <%end%>
   <section>
+  <%= form_with(url: search_products_path, method: :get, local: true) do%>
+  <div class="field is-grouped mb-5">
+    <div class="control is-flex-direction-row">
+      <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search Product here")%>
+      <% category = Category.all%>
+      <%=select_tag "categories", content_tag(:option,'All Categories',:value=>"0")+options_from_collection_for_select(category, "id", "name", include_blank: 'select') %>
+    </div>
+    <div class="control">
+      <%= submit_tag("search", class: "button is-link")%>
+    </div>
+  </div>
+<% end %>
     <%= yield %>
   </body>
 </html>

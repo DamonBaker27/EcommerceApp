@@ -25,7 +25,9 @@
           $<%= i.Price%>
         </th>
         <th>
-          <%=i.Stock%> <%= button_to remove_from_cart_path(i.id), method: :delete do %> Remove <%end%>
+          <input type="number" id="tentacles" name="tentacles"
+            min="1" max="100" value = "1">
+          <%= button_to remove_from_cart_path(i.id), method: :delete do %> Remove <%end%>
         </th>
       </tr>
     </tbody>
@@ -38,9 +40,15 @@
 <h2 class= "title is-4">Total: $<%= @total.round(2)%></h2>
 
 <%else%>
-<h1 class ="title is-3">You have no items :(</h1>
+<h1 class ="title is-3">You have no items</h1>
 
 
 
 
 <%end%>
+
+  <div class="">
+    <%= button_to "continue shopping", products_path, class: "button is-success"%>
+    <br>
+    <%= button_to "Place order", checkout_create_path, class: "button is-black" %>
+  </div>

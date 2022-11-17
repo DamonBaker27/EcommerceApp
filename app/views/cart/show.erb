@@ -4,7 +4,7 @@
 
 <%form_with model: item do |f|%>
     <%=f.hidden_field_tag :product_id, value: item.product.id%>
-    <%=f.number_field :quantity, value: item.quantity.to_i%>
+    <%= f.number_field :price, in: 1.0..20.0, step: 0.5 %>
     <%= f.submit "Update Cart"%>
     <%= link_to "Remove items", item, method: :delete, remote: true%>
 

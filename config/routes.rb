@@ -24,12 +24,17 @@ Rails.application.routes.draw do
     get "cancel", to: "checkout#cancel", as: "checkout_cancel"
   end
 
-  resources :products
+  # resources :products
+  resources :products do
+    collection do
+      get "search"
+    end
+  end
   # get "search", to: "Products#search"
   resources :cart
-  resources :categories
+  resources :category, only: %i[index show]
   # resources :products, only: %i[index show]
 
   # delete "/cart/", to: "cart#destroy"
-  post "category/name", to: "category#index"
+  # post "category/name", to: "category#index"
 end

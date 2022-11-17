@@ -2,5 +2,5 @@ class Province < ApplicationRecord
   has_one :tax
   has_many :users
 
-  validates :name, presence: true
+  validates :name, :code, presence: true
 end
