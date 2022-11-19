@@ -30,7 +30,7 @@
 
         <% if user_signed_in? %>
           <p>
-            Deliver to: <b><%= current_user.province.name %></b>
+            Deliver to: <b><%= current_user.address%>, <%= current_user.province.code%></b>
           </p>
         <% end %>
 
