@@ -9,7 +9,9 @@
             <div class = "card is-fullheight">
               <div class ="card-image has-text-centered ">
                 <figure class = "">
+                  <%if p.image.present?%>
                   <%= image_tag p.image%>
+                  <%end%>
                 </figure>
               </div>
               <div class= "card-content">

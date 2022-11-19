@@ -3,7 +3,9 @@
 
   <div class="columns has-background-white px-3 py-4">
     <div class="column">
+        <%if @product.image.present?%>
         <%= image_tag @product.image %>
+        <%end%>
     </div>
 
     <div class="column is-two-fifths">
@@ -28,11 +30,11 @@
 
         <% if user_signed_in? %>
           <p>
-            Deliver to <%= current_user.email %>
+            Deliver to: <b><%= current_user.province.name %></b>
           </p>
         <% end %>
 
-        <p><b>In Stock <%=@product.Stock%> available</b></p>
+        <p class="has-text-success"><b>In Stock</b></p>
 
         <div class="my-2">
           <% if user_signed_in? %>

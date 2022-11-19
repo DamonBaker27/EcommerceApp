@@ -26,6 +26,9 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+
+
+
   <div class = "field">
   <%= f.label :province %><br />
    <%= f.collection_select :province_id, Province.order(:name), :id, :name, {}, {class: "select"} %>
