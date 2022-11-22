@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "order_items/create"
-  get "order_items/update"
-  get "order_items/destroy"
   # devise_for :models
   # devise_for :users
   devise_for :users, controllers: { registrations: "users/registrations" }
@@ -30,13 +27,8 @@ Rails.application.routes.draw do
       get "search"
     end
   end
-  # get "search", to: "Products#search"
   get "cart", to: "cart#show"
   post "cart/add"
-  post "cart/remove"
+  delete "cart/remove"
   resources :category, only: %i[index show]
-  # resources :products, only: %i[index show]
-
-  # delete "/cart/", to: "cart#destroy"
-  # post "category/name", to: "category#index"
 end

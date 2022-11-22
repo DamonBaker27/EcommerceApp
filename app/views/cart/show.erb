@@ -1,18 +1,53 @@
-<% @order_items.each do |item|%>
-<h1><%=item.product.name%></h1>
-<h1><%=item.product.price%></h1>
+<h1 class = "title is-2">Your Shopping Cart Items</h1>
+<%if @cart.orderables.count.positive?%>
+<table class ="table">
+  <thead>
+    <tr>
+      <th>
+        Product Name
+      </th>
+      <th>
+        Price
+      </th>
+      <th>
+        Order Quantity
+      </th>
+    </tr>
+  </thead>
+  <% @cart.orderables.each do |i|%>
+  <% product = Product.find_by(id: i.product_id)%>
+    <tbody>
+          <tr>
+        <th>
+          <%= link_to product.Name, product%>
+        </th>
+        <th>
+          $<%= product.Price * i.quantity%>
+          <%= i.id%>
+        </th>
+        <th>
 
-<%form_with model: item do |f|%>
-    <%=f.hidden_field_tag :product_id, value: item.product.id%>
-    <%= f.number_field :price, in: 1.0..20.0, step: 0.5 %>
-    <%= f.submit "Update Cart"%>
-    <%= link_to "Remove items", item, method: :delete, remote: true%>
+        <%=form_with url: cart_add_path do |f| %>
+            <%= f.hidden_field :id, value: product.id %>
+            <%= f.number_field :quantity, value: i.quantity, min: 1  %>
+            <%= f.submit "update cart"%>
+        <%end%>
+        <%=form_with url: cart_remove_path, method: :delete do |f| %>
+            <%= f.hidden_field :id, value: i.id %>
+            <%= f.submit "Remove from Cart"%>
+        <%end%>
+        </th>
+      </tr>
+    </tbody>
+  <%end%>
+  </table>
 
+<h2 class= "title is-6">Gst: $</h2>
+<h2 class= "title is-6">Pst: $</h2>
+<h2 class= "title is-5">Subtotal:</h2>
+<h2 class= "title is-4">Total: $<%=@cart.total%></h2>
+
+<%else%>
+<h1 class ="title is-3">You have no items</h1>
 <%end%>
-<h2>Subtotal: <%=item.total%></h2>
-<%end%>
-
-<h3>Your current order total of: <%=current_order.subtotal%></h3>
-
-
 

@@ -12,16 +12,19 @@ class CartController < ApplicationController
     current_orderable = @cart.orderables.find_by(product_id: @product.id)
     if current_orderable && quantity > 0
       current_orderable.update(quantity: quantity)
+      redirect_to cart_path
+      flash[:notice] = "#{@product.Name} quantity updated."
     elsif quantity <= 0
       current_orderable.destroy
     else
       @cart.orderables.create(product: @product, quantity: quantity)
+      redirect_to product_path(@product.id)
+      flash[:notice] = "#{@product.Name} added to cart."
     end
-    flash[:notice] = "#{@product.Name} added to cart."
-    redirect_to product_path(@product.id)
   end
 
   def remove
-    Orderable.find_by(id: params[:id].destroy)
+    Orderable.find(params[:id]).destroy
+    redirect_to cart_path
   end
 end
