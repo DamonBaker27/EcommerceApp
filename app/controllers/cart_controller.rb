@@ -10,16 +10,15 @@ class CartController < ApplicationController
     @pst_amount = 0
 
     @cart.each do |item|
-      @gst_amount += item.Price * 0.05
-      @pst_amount += item.Price * 0.07
       @sub_total += item.Price
     end
 
+    @province = Province.find(current_user.province_id)
     @total = @gst_amount + @pst_amount + @sub_total
   end
 
   def calculate_gst
-    @gst_amount = @subtotal * 0.05
+    @gst_amount = @subtotal * 0.05 if @province.tax.gst.present?
   end
 
   def calculate_pst

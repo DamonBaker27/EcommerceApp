@@ -34,7 +34,7 @@
            <a class="navbar-item" href = <%= cart_index_path %> > Items in cart: <%=cart.count%></a>
 
           <% if user_signed_in?%>
-          <p class="navbar-item"><b>Hi, <%=current_user.name%>! from <%=current_user.province.name%> </b></p>
+          <p class="navbar-item"><b>Hi, <%=current_user.name%>! </b></p>
           <br>
           <%= button_to "Sign Out", destroy_user_session_path, class: "button is-success", method: :delete %>
 
