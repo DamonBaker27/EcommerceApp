@@ -31,7 +31,9 @@ Rails.application.routes.draw do
     end
   end
   # get "search", to: "Products#search"
-  resources :cart
+  get "cart", to: "cart#show"
+  post "cart/add"
+  post "cart/remove"
   resources :category, only: %i[index show]
   # resources :products, only: %i[index show]
 

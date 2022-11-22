@@ -37,19 +37,25 @@
         <p class="has-text-success"><b>In Stock</b></p>
 
         <div class="my-2">
-          <% if user_signed_in? %>
-            <% if session[:shopping_cart].include?(@product.id) %>
-              <%= button_to "Remove from Cart", remove_from_cart_path(@product.id), method: :delete %>
+
+          <%if user_signed_in? %>
+            <%cart = Cart.find(session[:cart_id])%>
+            <% if cart.orderables.include?(@product.id) %>
+              <%= button_to "Remove from Cart", cart_remove_path(@product.id), method: :delete %>
             <% else %>
-              <%= button_to "Add to Cart", add_to_cart_path(@product.id), class: "button is-primary" %>
-              <%= form_with url: checkout_create_path, remote: true do %>
-                <%= hidden_field_tag(:product_id, @product.id) %>
-                <%= button_tag 'Buy Now', class: "button is-info mt-2" %>
-              <% end %>
-            <% end %>
-          <% else %>
+              <%=form_with url: cart_add_path, remote: true do |f| %>
+                <%= f.hidden_field :id, value: @product.id %>
+                <%= f.number_field :quantity, value: 1, min: 1  %>
+                <%=f.submit "Add to Cart"%>
+            <%end%>
+          <% end %>
+          <%else%>
             <%= link_to "Sign In to Purchase", new_user_session_path, class: "button is-link is-rounded" %>
           <% end %>
+
+
+
+
         </div>
         <p>Secure Transaction</p>
         <p>Ships from Canada and sold by <%= link_to "Byte me!", root_path %></p>

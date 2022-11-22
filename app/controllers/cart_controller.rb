@@ -2,26 +2,26 @@ class CartController < ApplicationController
   helper_method :calculate_gst
   helper_method :calculate_pst
 
-  def index
-    @cart = Product.find(session[:shopping_cart])
-    @sub_total = 0
-    @total = 0
-    @gst_amount = 0
-    @pst_amount = 0
+  def show
+    @cart = Cart.find(session[:cart_id])
+  end
 
-    @cart.each do |item|
-      @sub_total += item.Price
+  def add
+    @product = Product.find_by(id: params[:id])
+    quantity = params[:quantity].to_i
+    current_orderable = @cart.orderables.find_by(product_id: @product.id)
+    if current_orderable && quantity > 0
+      current_orderable.update(quantity: quantity)
+    elsif quantity <= 0
+      current_orderable.destroy
+    else
+      @cart.orderables.create(product: @product, quantity: quantity)
     end
-
-    @province = Province.find(current_user.province_id)
-    @total = @gst_amount + @pst_amount + @sub_total
+    flash[:notice] = "#{@product.Name} added to cart."
+    redirect_to product_path(@product.id)
   end
 
-  def calculate_gst
-    @gst_amount = @subtotal * 0.05 if @province.tax.gst.present?
-  end
-
-  def calculate_pst
-    @pst_amount = @sub_total * 0.07
+  def remove
+    Orderable.find_by(id: params[:id].destroy)
   end
 end
