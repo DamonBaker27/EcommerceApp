@@ -1,9 +1,13 @@
 class CartController < ApplicationController
   helper_method :calculate_gst
   helper_method :calculate_pst
+  helper_method :calculate_hst
+  helper_method :calculate_total
 
   def show
     @cart = Cart.find(session[:cart_id])
+    @total = @cart.subtotal
+    @province = Province.find(current_user.province_id)
   end
 
   def add
@@ -26,5 +30,22 @@ class CartController < ApplicationController
   def remove
     Orderable.find(params[:id]).destroy
     redirect_to cart_path
+    flash[:notice] = "Item removed from cart."
+  end
+
+  def calculate_gst
+    (@province.tax.gst * @cart.subtotal.round(2)) if current_user.province.tax.gst.present?
+  end
+
+  def calculate_pst
+    (@province.tax.pst * @cart.subtotal.round(2)) if current_user.province.tax.pst.present?
+  end
+
+  def calculate_hst
+    (@province.tax.hst * @cart.subtotal.round(2)) if current_user.province.tax.hst.present?
+  end
+
+  def calculate_total
+    (calculate_gst + calculate_pst + calculate_hst + @cart.subtotal).round(2)
   end
 end

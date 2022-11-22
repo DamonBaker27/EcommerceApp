@@ -23,7 +23,6 @@
         </th>
         <th>
           $<%= product.Price * i.quantity%>
-          <%= i.id%>
         </th>
         <th>
 
@@ -42,11 +41,9 @@
   <%end%>
   </table>
 
-<h2 class= "title is-6">Gst: $</h2>
-<h2 class= "title is-6">Pst: $</h2>
-<h2 class= "title is-5">Subtotal:</h2>
-<h2 class= "title is-4">Total: $<%=@cart.total%></h2>
 
+<h2 class= "title is-5">Subtotal: $<%=@cart.subtotal%></h2>
+<h2 class= "title is-4"> Order Total: $<%=calculate_total%></h2>
 <%else%>
 <h1 class ="title is-3">You have no items</h1>
 <%end%>
