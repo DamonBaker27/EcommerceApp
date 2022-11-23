@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_22_193436) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_23_195630) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -94,6 +94,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_193436) do
     t.datetime "updated_at", null: false
     t.integer "quantity"
     t.integer "price"
+    t.integer "orders_id"
+    t.integer "products_id"
+    t.index ["orders_id"], name: "index_order_items_on_orders_id"
+    t.index ["products_id"], name: "index_order_items_on_products_id"
   end
 
   create_table "orderables", force: :cascade do |t|
@@ -140,6 +144,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_193436) do
     t.index ["province_id"], name: "index_taxes_on_province_id"
   end
 
+  create_table "user_orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "orders_id"
+    t.integer "users_id"
+    t.index ["orders_id"], name: "index_user_orders_on_orders_id"
+    t.index ["users_id"], name: "index_user_orders_on_users_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -159,9 +172,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_193436) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "order_items", "orders", column: "orders_id"
+  add_foreign_key "order_items", "products", column: "products_id"
   add_foreign_key "orderables", "carts"
   add_foreign_key "orderables", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "taxes", "provinces"
+  add_foreign_key "user_orders", "orders", column: "orders_id"
+  add_foreign_key "user_orders", "users", column: "users_id"
   add_foreign_key "users", "provinces"
 end

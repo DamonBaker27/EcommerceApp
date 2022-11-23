@@ -31,8 +31,10 @@
         </div>
         <div class = "navbar-end">
            <a class="navbar-item" href = "/admin/login">Admin Portal</a>
+           <%if user_signed_in?%>
            <a class="navbar-item" href = "<%= cart_path %>">Cart Items: <%= Cart.find(session[:cart_id]).orderables.count %></a>
 
+            <%end%>
           <% if user_signed_in?%>
           <p class="navbar-item"><b>Hi, <%=current_user.name%>! </b></p>
           <br>

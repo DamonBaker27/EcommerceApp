@@ -41,7 +41,9 @@
   <%end%>
   </table>
 
-
+<%if current_user.address.present?%>
+<h2 class= "title is-6">Shipping to: <%=current_user.address%> <%=current_user.province.code%></h2>
+<%end%>
 <h2 class= "title is-5">Subtotal: $<%=@cart.subtotal%></h2>
 <h2 class= "title is-4"> Order Total: $<%=calculate_total%></h2>
 <%else%>

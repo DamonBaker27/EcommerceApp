@@ -30,5 +30,7 @@ Rails.application.routes.draw do
   get "cart", to: "cart#show"
   post "cart/add"
   delete "cart/remove"
+
+  post "order/create"
   resources :category, only: %i[index show]
 end
