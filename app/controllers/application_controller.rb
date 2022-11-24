@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_render_cart
   before_action :initialize_cart
-  helper_method :cart
 
   protect_from_forgery with: :exception
 
@@ -22,10 +21,6 @@ class ApplicationController < ActionController::Base
       @cart = Cart.create
       session[:cart_id] = @cart.id
     end
-  end
-
-  def cart
-    Product.find(session[:shopping_cart])
   end
 
   protected

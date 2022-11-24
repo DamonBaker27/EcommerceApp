@@ -1,4 +1,4 @@
-<h1 class="title is-1">Order Invoice</h1>
+<h1 class="title is-1">Order Invoice <%=params[:id]%></h1>
 <table class ="table">
   <thead>
     <tr>
@@ -13,20 +13,32 @@
       </th>
     </tr>
   </thead>
+  <%subtotal = 0%>
   <%@order.order_items.each do |i|%>
-  <%quantity = Orderitem.find(i)%>
+  <%quantity = OrderItem.find(i.id)%>
     <tbody>
           <tr>
         <th>
           <%=i.product.Name%>
         </th>
         <th>
-          $ <%= i.product.Price%>
+          <%itemSubTotal = (i.product.Price.to_f.round(2) * quantity.quantity.to_f.round(2)).round(2) %>
+          <%subtotal += itemSubTotal%>
+          $ <%=itemSubTotal%>
         </th>
         <th>
-          <%=i.order_items%>
+          <%=quantity.quantity%>
         </th>
       </tr>
     </tbody>
   <%end%>
 </table>
+
+<%gst = subtotal * (current_user.province.tax.gst)%>
+<%pst = subtotal *current_user.province.tax.pst%>
+<%hst = subtotal *current_user.province.tax.hst%>
+
+
+<h2 class= "title is-5">Shipped to: <%= current_user.address%>, <%= current_user.province.code%></h2>
+<h2 class= "title is-5">Subtotal: $<%= subtotal%></h2>
+<h2 class= "title is-4"> Order Total: $<%=(subtotal + gst + pst + hst).round(2)%></h2>
