@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   post "cart/add"
   delete "cart/remove"
 
-  post "order/create"
+  post "order/create/:id", to: "order#create", as: "create_order"
+  resources :order, only: %i[index show]
   resources :category, only: %i[index show]
 end

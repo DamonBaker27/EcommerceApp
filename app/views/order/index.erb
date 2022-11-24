@@ -1,0 +1,25 @@
+<table class ="table">
+  <thead>
+    <tr>
+      <th>
+        Order#
+      </th>
+      <th>
+        Date
+      </th>
+    </tr>
+  </thead>
+  <%@user.orders.each do |o|%>
+    <tbody>
+          <tr>
+        <th>
+          <%= link_to o.id, o%>
+        </th>
+        <th>
+          <%=o.created_at%>
+        </th>
+      </tr>
+    </tbody>
+  <%end%>
+
+  </table>

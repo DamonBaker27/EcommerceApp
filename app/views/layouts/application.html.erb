@@ -27,7 +27,9 @@
         <div class="navbar-end">
           <a class="navbar-item" href = "/products/"> Products</a>
           <a class="navbar-item" href = "<%=category_index_path%>"> Categories</a>
-          <a class="navbar-item" href="<%= category_path(2)%>">Graphics cards</a>
+          <%if user_signed_in?%>
+          <a class="navbar-item" href="<%=  order_index_path%>">My Orders</a>
+          <%end%>
         </div>
         <div class = "navbar-end">
            <a class="navbar-item" href = "/admin/login">Admin Portal</a>
