@@ -1,4 +1,4 @@
-<h1 class = "title is-2">Your Shopping Cart Items</h1>
+<h1 class = "title is-2">Shopping Cart</h1>
 <%if @cart.orderables.count.positive?%>
 <table class ="table">
   <thead>
@@ -46,9 +46,13 @@
 <%end%>
 <h2 class= "title is-5">Subtotal: $<%=@cart.subtotal%></h2>
 <h2 class= "title is-4"> Order Total: $<%=calculate_total%></h2>
+<div class = "title is-4 mt-5"><%= link_to "Continue shopping", root_path%></div>
+<%= button_to "Place Order", create_order_path(@cart.id) %>
 <%else%>
-<h1 class ="title is-3">You have no items</h1>
+<h1 class ="title is-3">Your cart items show here.</h1>
+<div class = "title is-6"><%= link_to "Return to Shopping", root_path%></div>
 <%end%>
 
-<%= button_to "Place Order", create_order_path(@cart.id) %>
+
+
 

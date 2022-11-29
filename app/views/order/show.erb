@@ -1,4 +1,4 @@
-<h1 class="title is-1">Order Invoice <%=params[:id]%></h1>
+<h1 class="title is-1">Order Invoice #<%=params[:id]%></h1>
 <table class ="table">
   <thead>
     <tr>
@@ -40,5 +40,5 @@
 
 
 <h2 class= "title is-5">Shipped to: <%= current_user.address%>, <%= current_user.province.code%></h2>
-<h2 class= "title is-5">Subtotal: $<%= subtotal%></h2>
+<h2 class= "title is-5">Subtotal: $<%= subtotal.round(2)%></h2>
 <h2 class= "title is-4"> Order Total: $<%=(subtotal + gst + pst + hst).round(2)%></h2>
