@@ -30,6 +30,4 @@ class OrderController < ApplicationController
     user.orders.destroy_all
     redirect_to order_index_path
   end
-
-  def success; end
 end

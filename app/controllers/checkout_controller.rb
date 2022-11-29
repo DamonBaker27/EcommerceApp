@@ -7,6 +7,8 @@ class CheckoutController < ApplicationController
       puts @product = Product.find_by(id: i.product_id)
     end
 
+    subtotal = @cart.subtotal
+
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ["card"],
       success_url:          checkout_success_url,
@@ -27,7 +29,7 @@ class CheckoutController < ApplicationController
         {
           price_data: {
             currency:     "cad",
-            unit_amount:  (@product.Price * 100 * current_user.province.tax.gst).to_i,
+            unit_amount:  (subtotal * 100 * current_user.province.tax.gst).to_i,
             product_data: {
               name:        "gst",
               description: "Goods and Services Tax"
@@ -39,7 +41,7 @@ class CheckoutController < ApplicationController
         {
           price_data: {
             currency:     "cad",
-            unit_amount:  (@product.Price * 100 * current_user.province.tax.pst).to_i,
+            unit_amount:  (subtotal * 100 * current_user.province.tax.pst).to_i,
             product_data: {
               name:        "Pst",
               description: "Provincal Sales Tax"
