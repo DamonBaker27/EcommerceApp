@@ -1,2 +1,2 @@
-<h1 class ="title is-1">Thank you for shopping with us!</h1>
-<div class = "title is-6"><%= link_to "Return to Shopping", root_path%></div>
+<h1 class ="title is-1">Please confirm your order</h1>
+<div class = "title is-6"><%= link_to "Confirm Order", create_order_path(session[:cart_id])%></div>
