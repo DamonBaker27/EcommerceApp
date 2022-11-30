@@ -15,19 +15,18 @@
     </tr>
   </thead>
   <% @cart.orderables.each do |i|%>
-  <% product = Product.find_by(id: i.product_id)%>
     <tbody>
           <tr>
         <th>
-          <%= link_to product.Name, product%>
+          <%= link_to i.product.Name, i.product%>
         </th>
         <th>
-          $<%= product.Price * i.quantity%>
+          $<%= i.product.Price * i.quantity%>
         </th>
         <th>
 
         <%=form_with url: cart_add_path do |f| %>
-            <%= f.hidden_field :id, value: product.id %>
+            <%= f.hidden_field :id, value: i.product.id %>
             <%= f.number_field :quantity, value: i.quantity, min: 1  %>
             <%= f.submit "update cart"%>
         <%end%>
