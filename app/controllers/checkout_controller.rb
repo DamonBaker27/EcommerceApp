@@ -19,32 +19,50 @@ class CheckoutController < ApplicationController
         quantity:   i.quantity
       }
     end
-
-    line_items << {
-      price_data: {
-        currency:     "cad",
-        unit_amount:  (subtotal * 100 * current_user.province.tax.gst).to_i,
-        product_data: {
-          name:        "gst",
-          description: "Goods and Services Tax"
+    if current_user.province.tax.gst != 0
+      line_items << {
+        price_data: {
+          currency:     "cad",
+          unit_amount:  (subtotal * 100 * current_user.province.tax.gst).to_i,
+          product_data: {
+            name:        "Gst",
+            description: "Goods and Services Tax in #{current_user.province.code}"
+          },
+          tax_behavior: "exclusive"
         },
-        tax_behavior: "exclusive"
-      },
-      quantity:   1
-    }
-    line_items << {
-      price_data: {
-        currency:     "cad",
-        unit_amount:  (subtotal * 100 * current_user.province.tax.pst).to_i,
-        product_data: {
-          name:        "Pst",
-          description: "Provincal Sales Tax"
-        },
-        tax_behavior: "exclusive"
-      },
-      quantity:   1
-    }
+        quantity:   1
+      }
+    end
 
+    if current_user.province.tax.pst != 0
+      line_items << {
+        price_data: {
+          currency:     "cad",
+          unit_amount:  (subtotal * 100 * current_user.province.tax.pst).to_i,
+          product_data: {
+            name:        "Pst",
+            description: "Provincal Sales Tax in #{current_user.province.code}"
+          },
+          tax_behavior: "exclusive"
+        },
+        quantity:   1
+      }
+    end
+
+    if current_user.province.tax.hst != 0
+      line_items << {
+        price_data: {
+          currency:     "cad",
+          unit_amount:  (subtotal * 100 * current_user.province.tax.hst).to_i,
+          product_data: {
+            name:        "Hst",
+            description: " Harmonized Sales Tax in #{current_user.province.code}"
+          },
+          tax_behavior: "exclusive"
+        },
+        quantity:   1
+      }
+    end
     subtotal = @cart.subtotal
 
     @session = Stripe::Checkout::Session.create(

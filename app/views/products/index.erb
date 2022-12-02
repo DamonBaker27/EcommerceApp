@@ -3,19 +3,19 @@
   <section class = "section">
   <h1 class="title is-3">All products <%=@count%></h1>
     <div class= "container">
-      <div class = "columns  is-flex-direction-row is-flex-wrap-wrap is-align-items-stretch">
+      <div style = "height: 100%" class = "columns is-flex-direction-row is-flex-wrap-wrap is-align-items-stretch ">
         <%@products.each do |p|%>
           <div class = "column is-one-quarter ">
             <div class = "card ">
               <div class ="card-image has-text-centered ">
-                <figure class = "">
+                <figure>
                   <%if p.image.present?%>
                   <%= image_tag p.image%>
                   <%end%>
                 </figure>
               </div>
-              <div class= "card-content">
-                <p><a href="/products/<%=p.id%>"><%=p.Name%></p></a>
+              <div class= "card-content" >
+                <p style = " height: 50px text-overflow: ' '"  ><a href="/products/<%=p.id%>"><%=p.Name%></p></a>
                 <p class="is-size-3 my-5">
                   <b>$<%= p.Price %></b>
                 </p>
