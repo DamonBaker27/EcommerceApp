@@ -17,7 +17,7 @@
               <div class= "card-content" >
                 <p style = " height: 50px text-overflow: ' '"  ><a href="/products/<%=p.id%>"><%=p.Name%></p></a>
                 <p class="is-size-3 my-5">
-                  <b>$<%= p.Price %></b>
+                  <b>$<%= p.Price.round(2) %></b>
                 </p>
               </div>
             </div>

@@ -22,7 +22,7 @@
           <%= link_to i.Name, i%>
         </th>
         <th>
-          $<%= i.Price%>
+          $<%= i.Price.round(2)%>
         </th>
         <th>
           <input type="number" id="tentacles" name="tentacles"
