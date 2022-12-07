@@ -10,8 +10,10 @@ class OrderController < ApplicationController
   def create
     @cart = Cart.find(session[:cart_id])
     user = User.find(current_user.id)
-    order = Order.create
-    userorder = UserOrder.create(order_id: order.id, user_id: user.id)
+    payment_intent = params[:id]
+
+    order = Order.create(paymentId: payment_intent)
+    UserOrder.create(order_id: order.id, user_id: user.id)
 
     @cart.orderables.each do |item|
       OrderItem.create(

@@ -12,7 +12,7 @@ class CheckoutController < ApplicationController
           unit_amount:  (i.product.Price * 100).to_i,
           product_data: {
             name:        i.product.Name,
-            description: i.product.Description.empty? ? @product.Description : "No Description Avaliable"
+            description: i.product.Description.empty? ? @product.Description : "No Description Available"
           },
           tax_behavior: "exclusive"
         },
@@ -63,11 +63,10 @@ class CheckoutController < ApplicationController
         quantity:   1
       }
     end
-    subtotal = @cart.subtotal
 
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ["card"],
-      success_url:          checkout_success_url,
+      success_url:          "#{checkout_success_url}?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:           checkout_cancel_url,
       line_items:           line_items,
 
@@ -78,13 +77,13 @@ class CheckoutController < ApplicationController
 
   def success
     # we took the customer's money
-    redirect_to create_order_path(@cart.id)
-    # @session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    # @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    redirect_to create_order_path(@payment_intent)
   end
 
   def cancel
     # something went wrong with payment!
-    redirect_to root_path
+    redirect_to cart_path
   end
 end

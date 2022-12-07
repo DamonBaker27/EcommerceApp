@@ -66,7 +66,7 @@ products.each do |c|
   )
   query = c["image"]
   downloaded_image = URI.open(query)
-  product.image.attach(io: downloaded_image, filename: "d-.jpg")
+  product.image.attach(io: downloaded_image, filename: "#{product['name']}-.jpg")
 end
 
 puts "#{Product.count} new products were added"
