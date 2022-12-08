@@ -1,0 +1,15 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+  config:
+build:
+  docker:
+    web: Dockerfile
+    worker: worker/Dockerfile
+  config:
+    RAILS_ENV: production
+release:
+  command:
+    - bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3100 -b '0.0.0.0'"
+  image: worker
