@@ -8,25 +8,25 @@
 
 require "csv"
 
-Orderable.destroy_all
+# Orderable.destroy_all
 puts "deleted all Orderable"
-OrderItem.destroy_all
+# OrderItem.destroy_all
 puts "deleted all OrderItem"
-UserOrder.destroy_all
+# UserOrder.destroy_all
 puts "deleted all UserOrder"
-Order.destroy_all
+# Order.destroy_all
 puts "deleted all Order"
 Product.destroy_all
 puts "deleted all Product"
 Category.destroy_all
 puts "deleted all Category"
-AdminUser.destroy_all
+# AdminUser.destroy_all
 puts "deleted all AdminUser"
-Tax.destroy_all
+# Tax.destroy_all
 puts "deleted all Tax"
-User.delete_all
+# User.delete_all
 puts "deleted all Users"
-Province.destroy_all
+# Province.destroy_all
 puts "deleted all Province"
 
 puts "deleted all data"
