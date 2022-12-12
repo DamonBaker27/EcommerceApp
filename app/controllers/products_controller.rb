@@ -34,10 +34,10 @@ class ProductsController < ApplicationController
     @query = params[:keywords]
 
     @products = if category_id != "0"
-                  Product.where("name LIKE ? AND category_id = ?", wildcard_search,
+                  Product.where("products.Name LIKE ? AND category_id = ?", wildcard_search,
                                 category_id).page(params[:page])
                 else
-                  Product.where("Name LIKE ?", wildcard_search).page(params[:page])
+                  Product.where("products.Name ?", wildcard_search).page(params[:page])
                 end
   end
 end
