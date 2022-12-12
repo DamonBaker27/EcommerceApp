@@ -52,6 +52,7 @@ categories.each do |p|
     name:        p["name"],
     description: p["description"]
   )
+  puts category
 end
 products.each do |c|
   puts "#{c['image']}"
