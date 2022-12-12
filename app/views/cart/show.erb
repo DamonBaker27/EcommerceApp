@@ -21,7 +21,7 @@
           <%= link_to i.product.Name, i.product%>
         </th>
         <th>
-          $<%= i.product.Price * i.quantity%>
+          $<%= i.product.Price.round(2) * i.quantity%>
         </th>
         <th class="is-flex-direction-row">
         <%=form_with url: cart_add_path do |f| %>
@@ -43,8 +43,8 @@
 <%if current_user.address.present?%>
 <h2 class= "title is-6">Shipping to: <%=current_user.address%> <%=current_user.province.code%></h2>
 <%end%>
-<h2 class= "title is-5">Subtotal: $<%=@cart.subtotal%></h2>
-<h2 class= "title is-4"> Order Total: $<%=calculate_total%></h2>
+<h2 class= "title is-5">Subtotal: $<%=@cart.subtotal.round(2)%></h2>
+<h2 class= "title is-4"> Order Total: $<%=calculate_total.round(2)%></h2>
 <div class = "title is-4 mt-5"><%= link_to "Continue shopping", root_path%></div>
 <%= button_to "Proceed to Checkout", checkout_create_path(@cart.id) %>
 <%else%>

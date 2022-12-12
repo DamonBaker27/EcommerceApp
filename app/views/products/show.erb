@@ -16,28 +16,22 @@
         No description available.
         <%end%>
       </div>
-
         <p class="is-size-3 my-5">
-          <b><sup>$</sup><%= @product.Price %></b>
+          <b><sup>$</sup><%= @product.Price.round(2) %></b>
         </p>
-
         <p>
           Product category:
           <i>
            <%= link_to @product.category.name, @product.category %>
           </i>
         </p>
-
         <% if user_signed_in? %>
           <p>
             Deliver to: <b><%= current_user.address%>, <%= current_user.province.code%></b>
           </p>
         <% end %>
-
         <p class="has-text-success"><b>In Stock</b></p>
-
         <div class="my-2">
-
           <%if user_signed_in? %>
             <%cart = Cart.find(session[:cart_id])%>
             <% if cart.orderables.include?(@product.id) %>
