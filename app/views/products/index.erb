@@ -9,9 +9,7 @@
             <div class = "card ">
               <div class ="card-image has-text-centered ">
                 <figure>
-                  <%if p.image.present?%>
-                  <%= image_tag p.image%>
-                  <%end%>
+                  <img src="<%=p.imagePath%>" alt = 'image of <%= p.Name%>'>
                 </figure>
               </div>
               <div class= "card-content" >
