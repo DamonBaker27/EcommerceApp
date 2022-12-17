@@ -17,13 +17,13 @@ class CartController < ApplicationController
     if current_orderable && quantity.positive?
       current_orderable.update(quantity: quantity)
       redirect_to cart_path
-      flash[:notice] = "#{@product.Name} quantity updated."
+      flash[:notice] = "#{@product.name} quantity updated."
     elsif quantity <= 0
       current_orderable.destroy
     else
       @cart.orderables.create(product: @product, quantity: quantity)
       redirect_to product_path(@product.id)
-      flash[:notice] = "#{@product.Name} added to cart."
+      flash[:notice] = "#{@product.name} added to cart."
     end
   end
 

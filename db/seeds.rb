@@ -75,7 +75,7 @@ products.each do |c|
   category = Category.find_or_create_by!(name: c["Category"])
   puts category.name
   product = category.products.find_or_create_by!(
-    Name:        c["name"],
+    name:        c["name"],
     Price:       c["price"].to_f,
     Description: c["description"],
     imagePath:   c["image"],

@@ -11,7 +11,7 @@ class CheckoutController < ApplicationController
           currency:     "cad",
           unit_amount:  (i.product.Price * 100).to_i,
           product_data: {
-            name:        i.product.Name,
+            name:        i.product.name,
             description: i.product.Description.empty? ? @product.Description : "No Description"
           },
           tax_behavior: "exclusive"
