@@ -8,12 +8,28 @@
 
 require "csv"
 
+Orderable.destroy_all
+puts "deleted all Orderable"
+OrderItem.destroy_all
+puts "deleted all OrderItem"
+UserOrder.destroy_all
+puts "deleted all UserOrder"
+Order.destroy_all
+puts "deleted all Order"
 Product.destroy_all
+puts "deleted all Product"
 Category.destroy_all
+puts "deleted all Category"
 AdminUser.destroy_all
+puts "deleted all AdminUser"
 Tax.destroy_all
+puts "deleted all Tax"
+User.delete_all
+puts "deleted all Users"
 Province.destroy_all
+puts "deleted all Province"
 
+puts "deleted all data"
 product_file = Rails.root.join("db/bestbuy.csv")
 csv_data = File.read(product_file)
 products = CSV.parse(csv_data, headers: true, encoding: "utf-8")
@@ -27,7 +43,7 @@ province_csv_data = File.read(province_file)
 provinces = CSV.parse(province_csv_data, headers: true, encoding: "utf-8")
 
 provinces.each do |pr|
-  province = Province.create(
+  province = Province.create!(
     name: pr["name"],
     code: pr["code"]
   )
@@ -48,7 +64,7 @@ provinces.each do |pr|
 end
 
 categories.each do |p|
-  category = Category.create(
+  category = Category.create!(
     name:        p["name"],
     description: p["description"]
   )
@@ -56,17 +72,18 @@ end
 products.each do |c|
   puts "#{c['image']}"
   puts "#{c['Category']}"
-  category = Category.find_or_create_by(name: c["Category"])
-
-  product = category.products.find_or_create_by(
-    Name:        c["name"],
+  category = Category.find_or_create_by!(name: c["Category"])
+  puts category.name
+  product = category.products.find_or_create_by!(
+    name:        c["name"],
     Price:       c["price"].to_f,
     Description: c["description"],
+    imagePath:   c["image"],
     Stock:       rand(1..50)
   )
-  query = c["image"]
-  downloaded_image = URI.open(query)
-  product.image.attach(io: downloaded_image, filename: "#{product['name']}-.jpg")
+  # query = c["image"]
+  # downloaded_image = URI.open(query)
+  # product.image.attach(io: downloaded_image, filename: "#{product['name']}-.jpg")
 end
 
 puts "#{Product.count} new products were added"

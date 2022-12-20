@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_04_155110) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_17_183841) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_155110) do
     t.string "content_type"
     t.text "metadata"
     t.string "service_name", null: false
-    t.bigint "byte_size", null: false
+    t.integer "byte_size", null: false
     t.string "checksum"
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
@@ -119,13 +119,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_155110) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "Name"
+    t.string "name"
     t.string "Description"
     t.decimal "Price"
     t.integer "Stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
+    t.string "imagePath"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 

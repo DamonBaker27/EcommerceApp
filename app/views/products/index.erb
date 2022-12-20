@@ -9,13 +9,11 @@
             <div class = "card ">
               <div class ="card-image has-text-centered ">
                 <figure>
-                  <%if p.image.present?%>
-                  <%= image_tag p.image%>
-                  <%end%>
+                  <img src="<%=p.imagePath%>" alt = 'image of <%= p.name%>'>
                 </figure>
               </div>
               <div class= "card-content" >
-                <p style = " height: 50px text-overflow: ' '"  ><a href="/products/<%=p.id%>"><%=p.Name%></p></a>
+                <p style = " height: 50px text-overflow: ' '"  ><a href="/products/<%=p.id%>"><%=p.name%></p></a>
                 <p class="is-size-3 my-5">
                   <b>$<%= p.Price.round(2) %></b>
                 </p>
